@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>cn.zhangweide.alfred.shuttle</string>
+	<key>connections</key>
+	<dict>
+		<key>3B4751DB-B049-4845-A6C7-5674D595EE98</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD87FE30-74B7-40AB-862A-50842C1A582B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>zhwei</string>
+	<key>description</key>
+	<string>Alfred workflow for Shuttle</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Shuttle</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>applescript</key>
+				<string>-- This is v0.7 of the custom script for AlfredApp for iTerm 3.1.1+
+-- created by Sinan Eldem www.sinaneldem.com.tr
+
+on alfred_script(q)
+
+	if application "iTerm2" is running or application "iTerm" is running then
+		run script "
+			on run {q}
+				tell application \"iTerm\"
+					activate
+					try
+						select first window
+						set onlywindow to true
+					on error
+						create window with default profile
+						select first window
+						set onlywindow to true
+					end try
+					tell the first window
+						create tab with default profile
+						tell current session to write text q
+					end tell
+				end tell
+			end run
+		" with parameters {q}
+	else
+		run script "
+			on run {q}
+				tell application \"iTerm\"
+					activate
+					try
+						select first window
+					on error
+						create window with default profile
+						select first window
+					end try
+					tell the first window
+						tell current session to write text q
+					end tell
+				end tell
+			end run
+		" with parameters {q}
+	end if
+
+end alfred_script</string>
+				<key>cachescript</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.applescript</string>
+			<key>uid</key>
+			<string>CD87FE30-74B7-40AB-862A-50842C1A582B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>62</integer>
+				<key>keyword</key>
+				<string>ssh</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>require_once "filter.php";
+echo filter_hosts('{query}');</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3B4751DB-B049-4845-A6C7-5674D595EE98</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>3B4751DB-B049-4845-A6C7-5674D595EE98</key>
+		<dict>
+			<key>xpos</key>
+			<integer>190</integer>
+			<key>ypos</key>
+			<integer>250</integer>
+		</dict>
+		<key>CD87FE30-74B7-40AB-862A-50842C1A582B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>530</integer>
+			<key>ypos</key>
+			<integer>250</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
