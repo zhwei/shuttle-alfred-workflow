@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>cn.zhangweide.alfred.shuttle</string>
+	<key>category</key>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>3B4751DB-B049-4845-A6C7-5674D595EE98</key>

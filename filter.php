@@ -19,7 +19,7 @@ function filter_hosts($keyword)
         }
     }
 
-    $keyword = trim($keyword);
+    $keyword = strtolower(trim($keyword));
     if (!$keyword) {
         $result = $hosts;
     } else {
@@ -27,18 +27,19 @@ function filter_hosts($keyword)
         $contains = [];
         $matched = [];
         foreach ($hosts as $name => $cmd) {
-            if ($name === $keyword) {
+            $nameLower = strtolower($name);
+            if ($nameLower === $keyword) {
                 $equals[$name] = $cmd;
                 continue;
             }
 
-            if (strpos($name, $keyword) !== false) {
+            if (strpos($nameLower, $keyword) !== false) {
                 $contains[$name] = $cmd;
                 continue;
             }
 
             $pattern = join('*', str_split($keyword));
-            if (fnmatch("*{$pattern}*", $name)) {
+            if (fnmatch("*{$pattern}*", $nameLower)) {
                 $matched[$name] = $cmd;
                 continue;
             }
